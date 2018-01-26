@@ -4,7 +4,7 @@ class Table extends Component {
     constructor(props) {
         super(props);
         this.state = {
-        	hidden: [],
+        	hidden: this.props.hidden,
         	table: this.props.table
         }
     }
@@ -30,23 +30,17 @@ class Table extends Component {
 		table.unshift(this.state.table[0])
 		this.setState({table: table})
     	console.log(table)
+    };
+
+    hide = (field) => {
+    	let hidden = this.state.hidden
+    	hidden.push(field)
+    	this.setState({hidden: hidden})
     }
 
 
     render() {
     	let table = this.state.table
-    	/*
-    	let rows = []
-    	if (table.length > 0) {
-    		for (let i = 0; i < table.length; i++) {
-    			if(this.state.hidden.includes(table[i].column_id))
-    				return
-    			for (let n = 0; n < table[i].rows.length; n++) {
-    				rows[n][rows[n].length] = table[i].rows[n]
-    			}
-    		}
-    	}*/
-
         return (
             <div>
 				<table>
@@ -58,9 +52,13 @@ class Table extends Component {
 											(cell, i) => {
 												if(!this.state.hidden.includes(i)){
 													if(row.type === "cell")
-														return <td key={i}>{cell}</td>
+														return <td key={i}>{cell} </td>
 														else if(row.type === "header")
-															return <th key={i} onClick={() => this.sort(i, this)}>{cell}</th>
+															return (
+																<th key={i} onClick={() => this.sort(i, this)}>
+																	{cell}
+																	<span onClick={() => this.hide(i)}>Hide</span>
+																</th>)
 												}})
 									}</tr>
 								))
@@ -71,5 +69,5 @@ class Table extends Component {
         );
     }
 }
-
+Table.defaultProps = { hidden: [] };
 export default Table;

@@ -46,17 +46,27 @@ const table_2 = [
   {type: 'header', cells: [
     'Header-1',
     'header-2',
-    'Header-3'
+    'Header-3',
   ]},
   {type: 'cell', cells: [
     'cell-3',
     'cell-2',
-    'cell-1'
+    'cell-1',
   ]},
   {type: 'cell', cells: [
     'cell-1',
     'cell-2',
-    'cell-3'
+    'cell-3',
+  ]},
+  {type: 'cell', cells: [
+    'cell-3',
+    'cell-5',
+    'cell-6',
+  ]},
+  {type: 'cell', cells: [
+    'cell-4',
+    'cell-6',
+    'cell-7',
   ]}
 ]
 

@@ -1057,6 +1057,12 @@ var table_2 = [{
 }, {
   type: 'cell',
   cells: ['cell-1', 'cell-2', 'cell-3']
+}, {
+  type: 'cell',
+  cells: ['cell-3', 'cell-5', 'cell-6']
+}, {
+  type: 'cell',
+  cells: ['cell-4', 'cell-6', 'cell-7']
 }];
 
 var _default = _reactDom.default.render(_react.default.createElement(_Table.default, {
@@ -18447,8 +18453,21 @@ function (_Component) {
         console.log(table);
       }
     });
+    Object.defineProperty(_assertThisInitialized(_this), "hide", {
+      configurable: true,
+      enumerable: true,
+      writable: true,
+      value: function value(field) {
+        var hidden = _this.state.hidden;
+        hidden.push(field);
+
+        _this.setState({
+          hidden: hidden
+        });
+      }
+    });
     _this.state = {
-      hidden: [],
+      hidden: _this.props.hidden,
       table: _this.props.table
     };
     return _this;
@@ -18460,18 +18479,6 @@ function (_Component) {
       var _this2 = this;
 
       var table = this.state.table;
-      /*
-      let rows = []
-      if (table.length > 0) {
-      	for (let i = 0; i < table.length; i++) {
-      		if(this.state.hidden.includes(table[i].column_id))
-      			return
-      		for (let n = 0; n < table[i].rows.length; n++) {
-      			rows[n][rows[n].length] = table[i].rows[n]
-      		}
-      	}
-      }*/
-
       return _react.default.createElement("div", null, _react.default.createElement("table", null, _react.default.createElement("tbody", null, table.map(function (row, n) {
         return _react.default.createElement("tr", {
           key: n
@@ -18479,12 +18486,16 @@ function (_Component) {
           if (!_this2.state.hidden.includes(i)) {
             if (row.type === "cell") return _react.default.createElement("td", {
               key: i
-            }, cell);else if (row.type === "header") return _react.default.createElement("th", {
+            }, cell, " ");else if (row.type === "header") return _react.default.createElement("th", {
               key: i,
               onClick: function onClick() {
                 return _this2.sort(i, _this2);
               }
-            }, cell);
+            }, cell, _react.default.createElement("span", {
+              onClick: function onClick() {
+                return _this2.hide(i);
+              }
+            }, "Hide"));
           }
         }));
       }))));
@@ -18494,6 +18505,9 @@ function (_Component) {
   return Table;
 }(_react.Component);
 
+Table.defaultProps = {
+  hidden: []
+};
 var _default = Table;
 exports.default = _default;
 
