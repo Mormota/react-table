@@ -6,8 +6,8 @@ const CompressionPlugin = require('compression-webpack-plugin');
 module.exports = {
   entry: path.resolve(__dirname, 'index.js'),
   output: {
-    filename: 'index.js',
-    path: path.resolve(__dirname, 'public', 'js'),
+    filename: 'index_bundle.js',
+    path: path.resolve(__dirname, ''),
     library: 'socialtab',
     libraryTarget: 'umd'
   },
